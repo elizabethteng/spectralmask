@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: spectralmask
+Version: 0.0
+Summary: applies masks for analysis of absorption spectra
+Home-page: https://github.com/elizabethteng/spectralmask
+License: MIT
+License-File: LICENSE

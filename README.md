@@ -1,4 +1,4 @@
-# spectral-mask
+# spectralmask
 
 Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022
 

@@ -9,10 +9,10 @@ def get_requires():
     return reqs
 
 setup(
-name = "spectral-mask",
+name = "spectralmask",
 version = "0.0",
 description = "applies masks for analysis of absorption spectra",
-url = "https://github.com/elizabethteng/spectral_mask",
+url = "https://github.com/elizabethteng/spectralmask",
 license = "MIT",
 packages = find_packages(),
 install_requires = get_requires()
