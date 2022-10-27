@@ -25,10 +25,14 @@ To determine the value of the mask in each pixel of the ELODIE spectrum, we must
 
 ## Installation
 To use this package, first clone this repository:
-`git clone https://github.com/elizabethteng/spectralmask.git`
+```
+git clone https://github.com/elizabethteng/spectralmask.git
+```
 
 then open the repository directory and install it to your python environment:
-`pip install .`
+```
+pip install .
+```
 
 ## Tutorial
 
