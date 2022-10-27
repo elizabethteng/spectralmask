@@ -1,43 +1,28 @@
 # spectralmask
 
-*Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022*
-
-*original coding assignment from ASTRON 421 Observational Astrophysics class, Spring 2022*
-
 This package was created to aid in measuring radial velocities from stellar spectra by comparing observed spectra to masks based on fiducial absorption spectra. 
-
 
 ## Radial Velocities
 
-The "simple" way to measure a [radial velocity](https://en.wikipedia.org/wiki/Radial_velocity) is to identify some emission/absorption line in a spectrum and compare its observed wavelength to the wavelength measured "at rest" in a lab on earth. With that measurement in hand, the [Doppler equation](https://en.wikipedia.org/wiki/Doppler_effect) dictates how to convert the change in wavelength to a velocity.
+The "simple" way to measure a radial velocity is to compare the wavelength of an observed spectral line to the wavelength measured in a laboratory setting. With that measurement in hand, the Doppler equation dictates how to convert the difference in wavelength to a velocity. Using a single line can be limited if, for example, the spectrum is low signal to noise or there are multiple processes contributing to the line profile. 
 
-Using a single line can be limited however, if, for example, the spectrum is low signal to noise or there are multiple processes contributing to the line profile. 
-
-One can use "all the information" present in a spectrum to estimate the redshift/Doppler shift via a [cross correlation](https://en.wikipedia.org/wiki/Cross-correlation) with a template spectrum. The (discrete) cross-correlation is the sum of the observed spectrum multiplied by the template. 
+One can use "all the information" present in a spectrum to estimate the redshift/Doppler shift via a cross-correlation with a template spectrum. The (discrete) cross-correlation is the sum of the observed spectrum multiplied by the template. 
 $$CC = \sum f(m) g(m - n)$$
 
 where the sum is over all pixels $m$, $f$ is the spectrum, and $g$ is the shifted template (in practice we use interpolation to place the Doppler-shifted template onto the same wavelength grid as the primary observations).
 
 The cross-correlation function (CCF) is the value of the cross-correlation at different velocity shifts for the template. The peak of the CCF corresponds to your estimate for the RV of the observation.
 
-## Precise RV measurements
+## Measuring Radial Velocities using spectralmask
 
-The example spectra included (as fits files) were obtained with the ELODIE spectrograph and are continuum normalized. The file `G2_mask.csv` is the mask 
+The example spectra included in this package were obtained with the ELODIE spectrograph and are continuum normalized (but not corrected for NaNs or the motion of the Solar system barycenter). The file `G2_mask.csv` provided is a spectral mask that can be used to estimate the cross-correlation function. 
 
-You can download continuum normalized spectra from [my solutions](https://nuwildcat-my.sharepoint.com/:u:/g/personal/aam3503_ads_northwestern_edu/EcRLxrxJVhlHm0zvwwTHxnoB67g9ZBY3VVAWQsn_RtNbBA?e=dArEOo). Once you unpack that tarball, you will also notice the file `G2_mask.csv` – which is the mask used to estimate the CCF.
-
-The spectra for the grad students have *only* been continuum normalized. `NaN` has not been removed, and the motion of the Earth relative to the solar system barycenter has not been corrected. 
-
-The procedure to measure the CCF is largely the same, except that instead of a template we have a mask. The mask file consists of three columns. The first column defines the "left" or "blue" edge of a mask region, the second column defines the "right" or "red" edge of a mask region, and the third column defines the mask value. 
+The procedure to measure the cross-correlation function is largely the same, except that instead of a template we have a mask. The mask file consists of three columns. The first column defines the "left" or "blue" edge of a mask region, the second column defines the "right" or "red" edge of a mask region, and the third column defines the mask value. 
 
 In order to calculate the XC (and eventually the CCF), we must "interpolate" the mask onto the wavelength grid of the observed spectrum. This interpolation is not a simple call to numpy (as it is in the undergrad problem). 
 
 To determine the value of the mask in each pixel of the ELODIE spectrum, we must calculate the fractional coverage of the mask with the givel pixel, and then multiply that fraction by the mask value. 
 
-I will demonstrate what this means with a few examples: 
+*Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022*
 
-1. The mask starts at 4358.66 Ang and ends at 4358.89 Ang and has a value of 0.7. The pixel starts at 4358.7 Ang and ends at 4358.75 Ang. >>> The pixel mask has a value of 0.7. 
-
-2. The mask starts at 5422.12 Ang and ends at 5422.96 Ang and has a value of 0.3. The pixel starts at 5422.10 Ang and ends at 5422.15 Ang. >>> The pixel mask has a value of 0.3 * (5422.15 - 5422.12)/(5422.15 - 5422.10) = 0.18.
-
-3. One mask ends at 6452.3 and the next mask starts at 6452.9 Ang. The pixel starts at 6452.45 Ang and ends at 6452.50 Ang. >>> The pixel mask has a value of 0. 
+*original coding assignment from ASTRON 421 Observational Astrophysics class, Spring 2022*
