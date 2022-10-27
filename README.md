@@ -23,6 +23,14 @@ In order to calculate the XC (and eventually the CCF), we must "interpolate" the
 
 To determine the value of the mask in each pixel of the ELODIE spectrum, we must calculate the fractional coverage of the mask with the givel pixel, and then multiply that fraction by the mask value. 
 
+## Installation
+To install this package into your python environment, first clone this repository:
+\texttt{git clone https://github.com/elizabethteng/spectralmask.git}
+
+then open the repository directory and pip install
+
+## Tutorial
+
 *Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022*
 
 *original coding assignment from ASTRON 421 Observational Astrophysics class, Spring 2022*
