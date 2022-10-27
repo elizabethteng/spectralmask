@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-# taken from orbitize
+# adapted from orbitize
 
 def get_requires():
     reqs = []
