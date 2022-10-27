@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 from scipy.stats import norm
 import pandas as pd
 
-class Mask():
+class Mask(): 
     
     def __init__(self, wv, spec, mask):
         """ Mask class
