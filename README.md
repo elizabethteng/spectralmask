@@ -1,30 +1,28 @@
 # spectralmask
 
-Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022
+*Software project for Northwestern University ASTRON 441 Astronomical Techniques Fall 2022*
 
-original coding assignment from ASTRON 421 Observational Astrophysics class, Spring 2022
+*original coding assignment from ASTRON 421 Observational Astrophysics class, Spring 2022*
 
-you will analyze the spectra of a nearby star, and ultimately conclude that there is a planet orbiting that star. You will also measure the mass of that planet! The spectra were obtained with the [ELODIE spectrograph](https://en.wikipedia.org/wiki/ELODIE_spectrograph), which provides high resolution measurements of the spectrum (enabling us to precisely locate the positions of the absorption lines).
-
-you are given data in an uncorrected form, and then you measure the RV using an absorption spectrum "mask" – this is precisely how such measurements are made with the HARPS spectrograph, which is a successor to ELODIE.
+This package was created to aid in measuring radial velocities from stellar spectra by comparing observed spectra to masks based on fiducial absorption spectra. 
 
 
 ## Radial Velocities
-
-One of the great benefits of obtaining spectroscopic observations is that it allows us to measure the velocity of the absorbing gas (often this is gas in a star's atmophere) relative to the line of sight. These measurements can have important physical consequences, such as allowing us to infer the mass of two stars orbiting in a binary (see lecture). 
 
 The "simple" way to measure a [radial velocity](https://en.wikipedia.org/wiki/Radial_velocity) is to identify some emission/absorption line in a spectrum and compare its observed wavelength to the wavelength measured "at rest" in a lab on earth. With that measurement in hand, the [Doppler equation](https://en.wikipedia.org/wiki/Doppler_effect) dictates how to convert the change in wavelength to a velocity.
 
 Using a single line can be limited however, if, for example, the spectrum is low signal to noise or there are multiple processes contributing to the line profile. 
 
-One can use "all the information" present in a spectrum to estimate the redshift/Doppler shift via a [cross correlation](https://en.wikipedia.org/wiki/Cross-correlation) with a template spectrum (see also the lecture notes). The (discrete) cross-correlation is the sum of the observed spectrum multiplied by the template. 
+One can use "all the information" present in a spectrum to estimate the redshift/Doppler shift via a [cross correlation](https://en.wikipedia.org/wiki/Cross-correlation) with a template spectrum. The (discrete) cross-correlation is the sum of the observed spectrum multiplied by the template. 
 $$CC = \sum f(m) g(m - n)$$
 
-where the sum is over all pixels $m$, $f$ is the spectrum, and $g$ is the shifted template (in practice we will use interpolation to place the doppler shifted template onto the same wavelength grid as the primary observations).
+where the sum is over all pixels $m$, $f$ is the spectrum, and $g$ is the shifted template (in practice we use interpolation to place the Doppler-shifted template onto the same wavelength grid as the primary observations).
 
 The cross-correlation function (CCF) is the value of the cross-correlation at different velocity shifts for the template. The peak of the CCF corresponds to your estimate for the RV of the observation.
 
-## Precise RV measurements (graduates)
+## Precise RV measurements
+
+The example spectra included (as fits files) were obtained with the ELODIE spectrograph and are continuum normalized. The file `G2_mask.csv` is the mask 
 
 You can download continuum normalized spectra from [my solutions](https://nuwildcat-my.sharepoint.com/:u:/g/personal/aam3503_ads_northwestern_edu/EcRLxrxJVhlHm0zvwwTHxnoB67g9ZBY3VVAWQsn_RtNbBA?e=dArEOo). Once you unpack that tarball, you will also notice the file `G2_mask.csv` – which is the mask used to estimate the CCF.
 
