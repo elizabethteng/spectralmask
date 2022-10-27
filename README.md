@@ -22,7 +22,7 @@ pip install .
 The dependencies should also install automatically. 
 
 ## Tutorial
-The notebook `tutorial.ipynb` included in the main directory contains a brief tutorial demonstrating the basics of the package. Additional documentation exists in the docstrings of the source code. 
+The notebook `tutorial.ipynb` included in the main directory contains an explanation of the scientific basis for this package as well a brief tutorial demonstrating the basics of the code. Additional documentation exists in the docstrings of the source code. 
 
 --
 
